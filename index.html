@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyntrava AI | حلول الذكاء الاصطناعي والبرمجيات</title>
+    <meta name="description" content="Kyntrava AI تقدم حلولاً متكاملة في الذكاء الاصطناعي وتطوير البرمجيات والحلول السحابية. حول فكرتك إلى واقع رقمي.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        :root {
+            --primary-dark: #0A1628;
+            --primary-blue: #0D1B2A;
+            --cyan: #00D4FF;
+            --cyan-dark: #0099CC;
+            --gray-light: #F0F4F8;
+            --gray-medium: #E8ECF0;
+            --text-dark: #1A2A4A;
+            --text-gray: #4A5A6A;
+            --white: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        body {
+            background: var(--gray-light);
+            color: var(--text-dark);
+            line-height: 1.8;
+            overflow-x: hidden;
+            padding-top: 100px;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        /* ===== شريط التواصل العلوي ===== */
+        .top-bar {
+            background: var(--primary-dark);
+            color: #ccc;
+            font-size: 0.78rem;
+            padding: 6px 0;
+            border-bottom: 2px solid var(--cyan);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1001;
+        }
+        .top-bar .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .top-bar .social-text {
+            font-weight: 600;
+            color: #fff;
+            font-size: 0.8rem;
+        }
+        .top-bar .social-text i {
+            color: var(--cyan);
+            margin-left: 6px;
+            animation: bellRing 2s infinite;
+        }
+        @keyframes bellRing {
+            0%, 100% { transform: rotate(0); }
+            10% { transform: rotate(15deg); }
+            20% { transform: rotate(-15deg); }
+            30% { transform: rotate(10deg); }
+            40% { transform: rotate(-10deg); }
+            50% { transform: rotate(0); }
+        }
+        .top-bar .social-icons {
+            display: flex;
+            gap: 6px;
+        }
+        .top-bar .social-icons a {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.06);
+            transition: all 0.3s ease;
+        }
+        .top-bar .social-icons a:hover {
+            color: #fff;
+            background: var(--cyan);
+            border-color: var(--cyan);
+            transform: translateY(-2px);
+        }
+        .top-bar .social-icons a:hover i {
+            color: var(--primary-dark);
+        }
+
+        /* ===== أيقونات عائمة ===== */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            box-shadow: 0 4px 15px rgba(37,211,102,0.4);
+            z-index: 999;
+            animation: pulse 2s infinite;
+        }
+        .consult-float {
+            position: fixed;
+            bottom: 86px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: var(--cyan);
+            color: var(--primary-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            box-shadow: 0 4px 15px rgba(0,212,255,0.3);
+            z-index: 999;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
+            70% { box-shadow: 0 0 0 18px rgba(37,211,102,0); }
+            100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+        }
+
+        /* ===== شريط التنقل ===== */
+        .navbar {
+            background: var(--white);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 38px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 20px;
+            height: 62px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 3px solid var(--cyan);
+        }
+        .logo-area {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .logo-img {
+            height: 40px;
+            width: auto;
+            max-width: 150px;
+            object-fit: contain;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 5px;
+            align-items: center;
+        }
+        .nav-menu li {
+            position: relative;
+        }
+        .nav-menu a {
+            color: var(--text-gray);
+            font-weight: 600;
+            font-size: 0.82rem;
+            padding: 8px 16px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            display: block;
+            white-space: nowrap;
+        }
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: var(--cyan);
+            color: var(--primary-dark);
+        }
+
+        /* ===== زر القائمة للجوال ===== */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+        .menu-toggle:hover {
+            color: var(--cyan);
+        }
+        .nav-overlay {
+            display: none;
+            position: fixed;
+            top: 100px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.4);
+            z-index: 999;
+        }
+        .nav-overlay.active {
+            display: block;
+        }
+
+        /* ===== الهيرو ===== */
+        .hero {
+            position: relative;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 60px 20px 50px;
+            overflow: hidden;
+            background: var(--primary-dark);
+            margin-top: 0;
+        }
+        #heroCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(160deg, rgba(10,22,40,0.92) 0%, rgba(13,27,42,0.88) 50%, rgba(10,22,40,0.92) 100%);
+            z-index: 1;
+        }
+        .hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+        .hero-logo-wrapper {
+            display: inline-block;
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .hero-logo-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(0,212,255,0.2) 0%, rgba(0,212,255,0.05) 40%, transparent 70%);
+            border-radius: 50%;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        @keyframes glowPulse {
+            0%, 100% { width: 250px; height: 250px; opacity: 0.8; }
+            50% { width: 290px; height: 290px; opacity: 1; }
+        }
+        .hero-logo-img {
+            height: 140px;
+            width: auto;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 30px rgba(0,212,255,0.4)) drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .hero-tagline {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.7);
+        }
+        .hero-tagline span {
+            color: var(--cyan);
+        }
+        .hero-divider {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+            margin: 0 auto 18px;
+            border-radius: 2px;
+        }
+        .hero-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            line-height: 1.6;
+            opacity: 0.95;
+        }
+        .hero-title span {
+            color: var(--cyan);
+            font-weight: 800;
+        }
+        .hero-desc {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            line-height: 2;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .hero-btns {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .btn {
+            padding: 14px 34px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn i {
+            margin-left: 8px;
+        }
+        .btn-cyan {
+            background: var(--cyan);
+            color: var(--primary-dark);
+            box-shadow: 0 8px 25px rgba(0,212,255,0.35);
+        }
+        .btn-cyan:hover {
+            background: var(--cyan-dark);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(0,212,255,0.5);
+        }
+        .btn-outline {
+            border-color: rgba(255,255,255,0.8);
+            color: white;
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
+        }
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary-dark);
+            transform: translateY(-4px);
+            border-color: white;
+        }
+        .wave-bottom {
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: var(--gray-light);
+            clip-path: ellipse(70% 100% at 50% 100%);
+            z-index: 3;
+        }
+
+        /* ===== شريط الثقة ===== */
+        .trust-bar {
+            background: var(--white);
+            padding: 18px 15px;
+            border-bottom: 1px solid var(--gray-medium);
+        }
+        .trust-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+        .trust-item i {
+            color: var(--cyan);
+            font-size: 1.1rem;
+        }
+
+        /* ===== الأقسام العامة ===== */
+        .section {
+            padding: 50px 20px;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 35px;
+            font-weight: 800;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: var(--cyan);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+        .section-title span {
+            color: var(--cyan);
+        }
+
+        /* ===== بطاقات الاقتباس ===== */
+        .quotes-section {
+            background: var(--white);
+            padding: 50px 20px;
+        }
+        .quotes-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .quote-card {
+            background: var(--gray-light);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-medium);
+            transition: all 0.3s ease;
+        }
+        .quote-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+        .quote-card .quote-icon {
+            font-size: 2.2rem;
+            color: var(--cyan);
+            margin-bottom: 12px;
+        }
+        .quote-card p {
+            font-size: 1rem;
+            color: var(--text-dark);
+            line-height: 1.8;
+            font-weight: 700;
+        }
+
+        /* ===== الإحصائيات ===== */
+        .stats-section {
+            background: var(--gray-light);
+            padding: 50px 20px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 25px 15px;
+            background: var(--white);
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-medium);
+            transition: all 0.3s ease;
+        }
+        .stat-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        .stat-item .num {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--cyan);
+            margin-bottom: 6px;
+        }
+        .stat-item .label {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* ===== الخدمات ===== */
+        .services-section {
+            background: var(--white);
+            padding: 50px 20px;
+        }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+        .service-box {
+            background: var(--gray-light);
+            border-radius: 16px;
+            padding: 25px 18px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--gray-medium);
+            transition: all 0.3s ease;
+        }
+        .service-box:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--cyan);
+        }
+        .service-box .s-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            background: var(--cyan);
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin: 0 auto 12px;
+            box-shadow: 0 6px 18px rgba(0,212,255,0.25);
+        }
+        .service-box h4 {
+            font-size: 1rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+            font-weight: 800;
+        }
+        .service-box p {
+            color: var(--text-gray);
+            font-size: 0.82rem;
+            line-height: 1.6;
+        }
+
+        /* ===== لماذا نحن ===== */
+        .why-us-section {
+            background: var(--gray-light);
+            padding: 50px 20px;
+        }
+        .why-us-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+        .why-us-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 22px;
+            background: var(--white);
+            border-radius: 14px;
+            box-shadow: var(--shadow);
+            border-right: 4px solid var(--cyan);
+            transition: all 0.3s ease;
+        }
+        .why-us-item:hover {
+            transform: translateX(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+        .why-us-item .why-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: var(--cyan);
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .why-us-item h4 {
+            color: var(--text-dark);
+            margin-bottom: 3px;
+            font-weight: 800;
+            font-size: 0.95rem;
+        }
+        .why-us-item p {
+            color: var(--text-gray);
+            font-size: 0.85rem;
+            line-height: 1.7;
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
+            text-align: center;
+            color: white;
+        }
+        .cta-section h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .cta-section h2 span {
+            color: var(--cyan);
+        }
+        .cta-section p {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 25px;
+            line-height: 2;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== الفوتر ===== */
+        footer {
+            background: var(--primary-dark);
+            color: #ccc;
+            text-align: center;
+            padding: 25px 15px 18px;
+            font-size: 0.82rem;
+            border-top: 4px solid var(--cyan);
+        }
+        footer a {
+            color: var(--cyan);
+            text-decoration: none;
+            margin: 4px 8px;
+            font-weight: 600;
+        }
+        footer a:hover {
+            text-decoration: underline;
+            color: var(--cyan-dark);
+        }
+        footer .footer-links {
+            margin-bottom: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 4px;
+        }
+
+        /* ===== ميديا كويري - جوال ===== */
+        @media (max-width: 992px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-top: 90px;
+            }
+
+            .top-bar {
+                padding: 5px 0;
+                font-size: 0.7rem;
+            }
+            .top-bar .container {
+                gap: 8px;
+                padding: 0 12px;
+            }
+            .top-bar .social-text {
+                font-size: 0.72rem;
+            }
+            .top-bar .social-icons a {
+                width: 26px;
+                height: 26px;
+                font-size: 0.75rem;
+            }
+
+            .navbar {
+                top: 34px;
+                height: 56px;
+                padding: 0 12px;
+            }
+            .logo-img {
+                height: 34px;
+                max-width: 120px;
+            }
+            .menu-toggle {
+                display: block;
+                font-size: 1.5rem;
+            }
+            .nav-menu {
+                position: fixed;
+                top: 90px;
+                right: -100%;
+                width: 280px;
+                height: calc(100vh - 90px);
+                background: var(--white);
+                flex-direction: column;
+                padding: 20px 0;
+                gap: 2px;
+                box-shadow: -5px 0 30px rgba(0,0,0,0.15);
+                transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                overflow-y: auto;
+                align-items: stretch;
+            }
+            .nav-menu.open {
+                right: 0;
+            }
+            .nav-menu li {
+                width: 100%;
+            }
+            .nav-menu a {
+                padding: 14px 25px;
+                font-size: 0.95rem;
+                border-radius: 0;
+                white-space: normal;
+                border-right: 3px solid transparent;
+            }
+            .nav-menu a:hover,
+            .nav-menu a.active {
+                background: rgba(0,212,255,0.1);
+                border-right-color: var(--cyan);
+                color: var(--cyan);
+            }
+            .nav-overlay {
+                top: 90px;
+            }
+
+            .hero {
+                min-height: 80vh;
+                padding: 50px 15px 40px;
+            }
+            .hero-logo-img {
+                height: 100px;
+            }
+            .hero-tagline {
+                font-size: 1.5rem;
+            }
+            .hero-title {
+                font-size: 1.1rem;
+            }
+            .hero-desc {
+                font-size: 0.9rem;
+            }
+            .hero-logo-wrapper::before {
+                width: 180px;
+                height: 180px;
+            }
+            @keyframes glowPulse {
+                0%, 100% { width: 180px; height: 180px; }
+                50% { width: 210px; height: 210px; }
+            }
+
+            .quotes-container {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .why-us-grid {
+                grid-template-columns: 1fr;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
+            .btn {
+                padding: 12px 28px;
+                font-size: 0.9rem;
+            }
+            .trust-container {
+                gap: 15px;
+            }
+            .trust-item {
+                font-size: 0.78rem;
+            }
+            .whatsapp-float,
+            .consult-float {
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
+            }
+            .consult-float {
+                bottom: 74px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 80px;
+            }
+            .top-bar .social-text {
+                font-size: 0.65rem;
+            }
+            .top-bar .social-icons a {
+                width: 24px;
+                height: 24px;
+                font-size: 0.65rem;
+            }
+            .navbar {
+                top: 30px;
+            }
+            .nav-menu {
+                top: 86px;
+                height: calc(100vh - 86px);
+                width: 100%;
+            }
+            .nav-overlay {
+                top: 86px;
+            }
+            .hero-tagline {
+                font-size: 1.2rem;
+            }
+            .hero-logo-img {
+                height: 80px;
+            }
+            .hero-logo-wrapper::before {
+                width: 140px;
+                height: 140px;
+            }
+            @keyframes glowPulse {
+                0%, 100% { width: 140px; height: 140px; }
+                50% { width: 170px; height: 170px; }
+            }
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-btns .btn {
+                width: 100%;
+                max-width: 260px;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .nav-overlay {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== شريط التواصل العلوي ===== -->
+    <div class="top-bar">
+        <div class="container">
+            <span class="social-text">
+                <i class="fas fa-bell"></i> تابعنا على صفحاتنا الرسمية
+            </span>
+            <div class="social-icons">
+                <a href="https://www.facebook.com/profile.php?id=61592891921328" target="_blank" title="فيسبوك">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://www.instagram.com/kyntravaai" target="_blank" title="إنستغرام">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="#" target="_blank" title="تويتر">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" target="_blank" title="لينكد إن">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" target="_blank" title="يوتيوب">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== أيقونات عائمة ===== -->
+    <a href="https://wa.me/963981193023" class="whatsapp-float" target="_blank" aria-label="تواصل عبر واتساب">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <a href="consultation.html" class="consult-float" aria-label="احجز استشارة">
+        <i class="fas fa-comment-dots"></i>
+    </a>
+
+    <!-- ===== شريط التنقل ===== -->
+    <nav class="navbar">
+        <div class="logo-area">
+            <a href="index.html">
+                <img src="https://imgur.com/d2YNdZQ.png" alt="شعار Kyntrava AI" class="logo-img">
+            </a>
+        </div>
+        <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html" class="active">الرئيسية</a></li>
+            <li><a href="about.html">عن الشركة</a></li>
+            <li><a href="services.html">خدماتنا</a></li>
+            <li><a href="consultation.html">الاستشارات</a></li>
+            <li><a href="contact.html">اتصل بنا</a></li>
+        </ul>
+    </nav>
+    <div class="nav-overlay" id="navOverlay"></div>
+
+    <!-- ===== الهيرو ===== -->
+    <header class="hero">
+        <canvas id="heroCanvas"></canvas>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-logo-wrapper">
+                <img src="https://imgur.com/d2YNdZQ.png" alt="شعار Kyntrava AI" class="hero-logo-img">
+            </div>
+            <h1 class="hero-tagline"><span>Kyntrava AI</span> المستقبل بالذكاء الاصطناعي</h1>
+            <div class="hero-divider"></div>
+            <p class="hero-title">نبتكر حلولاً رقمية ذكية تواكب تطلعاتك وتدفع أعمالك نحو آفاق جديدة</p>
+            <p class="hero-desc">نصنع لك حلولاً ذكية تتكيف مع احتياجاتك وتنمو مع نمو أعمالك. لا تترك منافسيك يسبقونك.. وظف الذكاء الاصطناعي في عملك اليوم.</p>
+            <div class="hero-btns">
+                <a href="services.html" class="btn btn-cyan"><i class="fas fa-robot"></i> اكتشف خدماتنا</a>
+                <a href="consultation.html" class="btn btn-outline"><i class="fas fa-calendar-check"></i> احجز استشارة مجانية</a>
+            </div>
+        </div>
+        <div class="wave-bottom"></div>
+    </header>
+
+    <!-- ===== شريط الثقة ===== -->
+    <section class="trust-bar">
+        <div class="trust-container">
+            <div class="trust-item"><i class="fas fa-check-circle"></i><span>خبرة 8 سنوات</span></div>
+            <div class="trust-item"><i class="fas fa-check-circle"></i><span>+120 مشروع برمجي</span></div>
+            <div class="trust-item"><i class="fas fa-check-circle"></i><span>50 عميل حول العالم</span></div>
+            <div class="trust-item"><i class="fas fa-check-circle"></i><span>فريق 25 خبير تقني</span></div>
+        </div>
+    </section>
+
+    <!-- ===== بطاقات الاقتباس ===== -->
+    <section class="quotes-section">
+        <div class="quotes-container">
+            <div class="quote-card">
+                <div class="quote-icon"><i class="fas fa-brain"></i></div>
+                <p>"الذكاء الاصطناعي ليس مجرد تقنية.. إنه مستقبل كل صناعة."</p>
+            </div>
+            <div class="quote-card">
+                <div class="quote-icon"><i class="fas fa-code"></i></div>
+                <p>"كل سطر كود نكتبه يهدف لتحويل فكرتك إلى واقع رقمي ملموس."</p>
+            </div>
+            <div class="quote-card">
+                <div class="quote-icon"><i class="fas fa-rocket"></i></div>
+                <p>"مع Kyntrava AI، عملك ليس مجرد مشروع.. إنه رحلة نحو المستقبل."</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== الإحصائيات ===== -->
+    <section class="stats-section">
+        <div class="container">
+            <h2 class="section-title"><span>Kyntrava AI</span> في أرقام</h2>
+            <div class="stats-grid">
+                <div class="stat-item"><div class="num">50</div><div class="label">عميل حول العالم</div></div>
+                <div class="stat-item"><div class="num">+120</div><div class="label">مشروع برمجي منجز</div></div>
+                <div class="stat-item"><div class="num">8</div><div class="label">سنوات من الخبرة</div></div>
+                <div class="stat-item"><div class="num">25</div><div class="label">مطور وخبير تقني</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== الخدمات ===== -->
+    <section class="services-section">
+        <div class="container">
+            <h2 class="section-title">ماذا <span>نقدم</span> لك؟</h2>
+            <div class="services-grid">
+                <div class="service-box">
+                    <div class="s-icon"><i class="fas fa-brain"></i></div>
+                    <h4>الذكاء الاصطناعي</h4>
+                    <p>حلول AI متقدمة لتحليل البيانات والأتمتة الذكية</p>
+                </div>
+                <div class="service-box">
+                    <div class="s-icon"><i class="fas fa-code"></i></div>
+                    <h4>تطوير البرمجيات</h4>
+                    <p>تطبيقات ويب وجوال مخصصة حسب متطلباتك</p>
+                </div>
+                <div class="service-box">
+                    <div class="s-icon"><i class="fas fa-cloud"></i></div>
+                    <h4>حلول سحابية</h4>
+                    <p>بنية تحتية سحابية آمنة وقابلة للتطوير</p>
+                </div>
+                <div class="service-box">
+                    <div class="s-icon"><i class="fas fa-headset"></i></div>
+                    <h4>استشارة مجانية</h4>
+                    <p>فريقنا التقني جاهز للإجابة على استفساراتك</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== لماذا نحن ===== -->
+    <section class="why-us-section">
+        <div class="container">
+            <h2 class="section-title">لماذا <span>Kyntrava AI</span>؟</h2>
+            <div class="why-us-grid">
+                <div class="why-us-item">
+                    <div class="why-icon"><i class="fas fa-microchip"></i></div>
+                    <div>
+                        <h4>تقنيات متطورة</h4>
+                        <p>نستخدم أحدث تقنيات الذكاء الاصطناعي والتعلم الآلي لتقديم حلول مبتكرة تنافسية.</p>
+                    </div>
+                </div>
+                <div class="why-us-item">
+                    <div class="why-icon"><i class="fas fa-users"></i></div>
+                    <div>
+                        <h4>فريق متكامل</h4>
+                        <p>مطورون، مصممون، وخبراء AI يعملون معاً بروح الفريق الواحد لتحقيق رؤيتك.</p>
+                    </div>
+                </div>
+                <div class="why-us-item">
+                    <div class="why-icon"><i class="fas fa-shield-alt"></i></div>
+                    <div>
+                        <h4>أمان وحماية</h4>
+                        <p>نلتزم بأعلى معايير الأمان السيبراني وحماية بيانات عملائنا بكل خصوصية.</p>
+                    </div>
+                </div>
+                <div class="why-us-item">
+                    <div class="why-icon"><i class="fas fa-headset"></i></div>
+                    <div>
+                        <h4>دعم فني مستمر</h4>
+                        <p>نقدم دعماً فنياً متواصلاً وتحديثات دورية لضمان استمرارية عمل حلولك بكفاءة.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>هل أنت مستعد <span>للانطلاق نحو المستقبل؟</span></h2>
+            <p>لا تدع فكرة مشروعك التقني تبقى حبراً على ورق. فريقنا جاهز لتقديم استشارة أولية مجانية وتقييم فرص نجاح مشروعك.</p>
+            <a href="consultation.html" class="btn btn-cyan"><i class="fas fa-rocket"></i> ابدأ الآن - احجز استشارتك</a>
+        </div>
+    </section>
+
+    <!-- ===== الفوتر ===== -->
+    <footer>
+        <div class="footer-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="about.html">عن الشركة</a>
+            <a href="services.html">خدماتنا</a>
+            <a href="consultation.html">الاستشارات</a>
+            <a href="contact.html">اتصل بنا</a>
+            <a href="privacy.html">سياسة الخصوصية</a>
+            <a href="terms.html">الشروط والأحكام</a>
+        </div>
+        <p>© 2026 Kyntrava AI. جميع الحقوق محفوظة. | <a href="privacy.html">سياسة الخصوصية</a> | <a href="terms.html">الشروط والأحكام</a></p>
+    </footer>
+
+    <!-- ===== جافا سكريبت ===== -->
+    <script>
+        // ===== قائمة الجوال =====
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        const navOverlay = document.getElementById('navOverlay');
+
+        function toggleMenu() {
+            navMenu.classList.toggle('open');
+            navOverlay.classList.toggle('active');
+            const icon = menuToggle.querySelector('i');
+            if (navMenu.classList.contains('open')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        navOverlay.addEventListener('click', toggleMenu);
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                if (navMenu.classList.contains('open')) {
+                    toggleMenu();
+                }
+            });
+        });
+
+        // ===== Three.js - روبوتات متحركة =====
+        (function() {
+            const canvas = document.getElementById('heroCanvas');
+            if (!canvas) return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 14;
+            camera.position.y = 1.5;
+
+            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            const ambientLight = new THREE.AmbientLight(0x2C3E50, 0.5);
+            scene.add(ambientLight);
+
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4);
+            directionalLight.position.set(5, 5, 5);
+            scene.add(directionalLight);
+
+            const pointLight1 = new THREE.PointLight(0x00D4FF, 0.6, 15);
+            pointLight1.position.set(-4, 2, 4);
+            scene.add(pointLight1);
+
+            const pointLight2 = new THREE.PointLight(0x0099CC, 0.4, 15);
+            pointLight2.position.set(4, -1, 3);
+            scene.add(pointLight2);
+
+            const gridHelper = new THREE.GridHelper(20, 20, 0x00D4FF, 0x1a2a3a);
+            gridHelper.position.y = -4;
+            scene.add(gridHelper);
+
+            const robotsGroup = new THREE.Group();
+            scene.add(robotsGroup);
+
+            const robotPositions = [
+                { x: -4, z: -2, scale: 0.8 },
+                { x: 0, z: -3, scale: 1.0 },
+                { x: 4, z: -1.5, scale: 0.7 },
+                { x: -5, z: 2, scale: 0.6 },
+                { x: 5, z: 2.5, scale: 0.9 },
+                { x: -2, z: 4, scale: 0.7 },
+                { x: 3, z: 4.5, scale: 0.8 },
+            ];
+
+            const robotColors = [0x00D4FF, 0x0099CC, 0x00B8D4, 0x26C6DA, 0x4DD0E1, 0x00D4FF, 0x0099CC];
+
+            robotPositions.forEach((pos, index) => {
+                const group = new THREE.Group();
+                const color = robotColors[index % robotColors.length];
+
+                const bodyGeo = new THREE.BoxGeometry(0.8, 1.2, 0.6);
+                const bodyMat = new THREE.MeshPhongMaterial({ color: color, emissive: color, emissiveIntensity: 0.15, shininess: 80 });
+                const body = new THREE.Mesh(bodyGeo, bodyMat);
+                body.position.y = 0.6;
+                group.add(body);
+
+                const headGeo = new THREE.SphereGeometry(0.35, 16, 16);
+                const headMat = new THREE.MeshPhongMaterial({ color: 0xffffff, emissive: color, emissiveIntensity: 0.1, shininess: 100 });
+                const head = new THREE.Mesh(headGeo, headMat);
+                head.position.y = 1.4;
+                group.add(head);
+
+                const eyeGeo = new THREE.SphereGeometry(0.06, 8, 8);
+                const eyeMat = new THREE.MeshPhongMaterial({ color: 0x00D4FF, emissive: 0x00D4FF, emissiveIntensity: 0.8 });
+                const eye1 = new THREE.Mesh(eyeGeo, eyeMat);
+                eye1.position.set(-0.12, 1.5, 0.35);
+                group.add(eye1);
+                const eye2 = new THREE.Mesh(eyeGeo, eyeMat);
+                eye2.position.set(0.12, 1.5, 0.35);
+                group.add(eye2);
+
+                const armGeo = new THREE.BoxGeometry(0.15, 0.6, 0.15);
+                const armMat = new THREE.MeshPhongMaterial({ color: color, emissive: color, emissiveIntensity: 0.1 });
+                const arm1 = new THREE.Mesh(armGeo, armMat);
+                arm1.position.set(-0.5, 0.6, 0);
+                group.add(arm1);
+                const arm2 = new THREE.Mesh(armGeo, armMat);
+                arm2.position.set(0.5, 0.6, 0);
+                group.add(arm2);
+
+                const legGeo = new THREE.BoxGeometry(0.2, 0.4, 0.2);
+                const legMat = new THREE.MeshPhongMaterial({ color: color, emissive: color, emissiveIntensity: 0.05 });
+                const leg1 = new THREE.Mesh(legGeo, legMat);
+                leg1.position.set(-0.25, -0.2, 0);
+                group.add(leg1);
+                const leg2 = new THREE.Mesh(legGeo, legMat);
+                leg2.position.set(0.25, -0.2, 0);
+                group.add(leg2);
+
+                const antennaGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.3);
+                const antennaMat = new THREE.MeshPhongMaterial({ color: 0x00D4FF, emissive: 0x00D4FF, emissiveIntensity: 0.5 });
+                const antenna = new THREE.Mesh(antennaGeo, antennaMat);
+                antenna.position.set(0, 1.7, 0);
+                group.add(antenna);
+
+                const sphereGeo = new THREE.SphereGeometry(0.06, 8, 8);
+                const sphereMat = new THREE.MeshPhongMaterial({ color: 0x00D4FF, emissive: 0x00D4FF, emissiveIntensity: 0.8 });
+                const sphere = new THREE.Mesh(sphereGeo, sphereMat);
+                sphere.position.set(0, 1.85, 0);
+                group.add(sphere);
+
+                group.position.set(pos.x, -2.5, pos.z);
+                group.scale.set(pos.scale, pos.scale, pos.scale);
+                group.userData = {
+                    rotSpeed: 0.005 + Math.random() * 0.01,
+                    floatSpeed: 0.5 + Math.random() * 0.5,
+                    floatAmp: 0.15 + Math.random() * 0.15,
+                    phase: Math.random() * Math.PI * 2
+                };
+                robotsGroup.add(group);
+            });
+
+            const particlesGroup = new THREE.Group();
+            scene.add(particlesGroup);
+
+            const particlesCount = 80;
+            const particles = [];
+
+            for (let i = 0; i < particlesCount; i++) {
+                const size = Math.random() * 0.06 + 0.02;
+                const geo = new THREE.SphereGeometry(size, 6, 6);
+                const mat = new THREE.MeshPhongMaterial({
+                    color: Math.random() > 0.5 ? 0x00D4FF : 0x0099CC,
+                    emissive: 0x00D4FF,
+                    emissiveIntensity: 0.3,
+                    transparent: true,
+                    opacity: 0.5 + Math.random() * 0.3
+                });
+                const particle = new THREE.Mesh(geo, mat);
+                particle.position.set(
+                    (Math.random() - 0.5) * 18,
+                    (Math.random() - 0.5) * 12,
+                    (Math.random() - 0.5) * 8
+                );
+                particle.userData = {
+                    speedY: (Math.random() - 0.5) * 0.015,
+                    speedX: (Math.random() - 0.5) * 0.008,
+                    speedZ: (Math.random() - 0.5) * 0.008,
+                    baseY: particle.position.y,
+                    amplitude: Math.random() * 1.5,
+                    phase: Math.random() * Math.PI * 2
+                };
+                particles.push(particle);
+                particlesGroup.add(particle);
+            }
+
+            const ringsGroup = new THREE.Group();
+            scene.add(ringsGroup);
+
+            for (let j = 0; j < 3; j++) {
+                const ringGeo = new THREE.TorusGeometry(3.5 + j * 1.8, 0.03, 16, 80);
+                const ringMat = new THREE.MeshPhongMaterial({
+                    color: 0x00D4FF,
+                    emissive: 0x00D4FF,
+                    emissiveIntensity: 0.2,
+                    transparent: true,
+                    opacity: 0.2 - j * 0.05
+                });
+                const ring = new THREE.Mesh(ringGeo, ringMat);
+                ring.rotation.x = Math.PI / 2 + j * 0.25;
+                ring.position.y = -2 + j * 0.5;
+                ring.userData = { rotationSpeed: 0.003 + j * 0.002 };
+                ringsGroup.add(ring);
+            }
+
+            function animate() {
+                requestAnimationFrame(animate);
+                const time = Date.now() * 0.001;
+
+                robotsGroup.children.forEach((robot) => {
+                    const data = robot.userData;
+                    robot.rotation.y += data.rotSpeed;
+                    robot.position.y = -2.5 + Math.sin(time * data.floatSpeed + data.phase) * data.floatAmp;
+                });
+
+                robotsGroup.rotation.y += 0.0005;
+
+                particles.forEach(p => {
+                    p.position.y += p.userData.speedY;
+                    p.position.x += Math.sin(time + p.userData.phase) * 0.008;
+                    if (Math.abs(p.position.y - p.userData.baseY) > p.userData.amplitude) {
+                        p.userData.speedY *= -1;
+                    }
+                    p.material.opacity = 0.4 + Math.sin(time * 2 + p.userData.phase) * 0.2;
+                });
+
+                particlesGroup.rotation.y += 0.0003;
+
+                ringsGroup.children.forEach(ring => {
+                    ring.rotation.z += ring.userData.rotationSpeed;
+                });
+
+                pointLight1.intensity = 0.4 + Math.sin(time * 1.5) * 0.2;
+                pointLight2.intensity = 0.4 + Math.cos(time * 1.3) * 0.2;
+
+                renderer.render(scene, camera);
+            }
+
+            animate();
+
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            let mouseX = 0, mouseY = 0;
+            window.addEventListener('mousemove', (e) => {
+                mouseX = (e.clientX / window.innerWidth) * 2 - 1;
+                mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
+                robotsGroup.rotation.y += (mouseX * 0.2 - robotsGroup.rotation.y) * 0.02;
+                robotsGroup.rotation.x += (mouseY * 0.1 - robotsGroup.rotation.x) * 0.02;
+            });
+        })();
+    </script>
+</body>
+</html>
