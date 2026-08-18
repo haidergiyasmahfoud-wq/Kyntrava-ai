@@ -270,82 +270,212 @@
             position: relative;
             z-index: 2;
         }
+
+        /* ===== شعاع أبيض خلف اللوجو ===== */
         .hero-logo-wrapper {
             display: inline-block;
             position: relative;
             margin-bottom: 15px;
         }
+        
+        /* الشعاع الأبيض الرئيسي */
         .hero-logo-wrapper::before {
             content: '';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(0,212,255,0.2) 0%, rgba(0,212,255,0.05) 40%, transparent 70%);
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, 
+                rgba(255,255,255,0.25) 0%, 
+                rgba(255,255,255,0.08) 30%, 
+                rgba(255,255,255,0.02) 60%, 
+                transparent 80%
+            );
             border-radius: 50%;
-            animation: glowPulse 3s ease-in-out infinite;
+            animation: glowWhite 3s ease-in-out infinite;
+            z-index: 0;
         }
-        @keyframes glowPulse {
-            0%, 100% { width: 250px; height: 250px; opacity: 0.8; }
-            50% { width: 290px; height: 290px; opacity: 1; }
+        
+        /* الشعاع الأزرق الثانوي */
+        .hero-logo-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(circle, 
+                rgba(0,212,255,0.2) 0%, 
+                rgba(0,212,255,0.05) 40%, 
+                transparent 70%
+            );
+            border-radius: 50%;
+            animation: glowBlue 4s ease-in-out infinite;
+            z-index: 0;
         }
+
+        @keyframes glowWhite {
+            0%, 100% { 
+                width: 350px; 
+                height: 350px; 
+                opacity: 0.8;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% { 
+                width: 420px; 
+                height: 420px; 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        @keyframes glowBlue {
+            0%, 100% { 
+                width: 280px; 
+                height: 280px; 
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% { 
+                width: 340px; 
+                height: 340px; 
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1.15);
+            }
+        }
+
+        /* ===== حلقة ضوئية متحركة حول اللوجو ===== */
+        .hero-logo-ring {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255,255,255,0.08);
+            z-index: 0;
+            animation: ringRotate 12s linear infinite;
+        }
+        .hero-logo-ring::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: var(--cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--cyan), 0 0 40px rgba(0,212,255,0.3);
+            animation: ringDot 4s ease-in-out infinite;
+        }
+        .hero-logo-ring::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            right: 50%;
+            transform: translateX(50%);
+            width: 8px;
+            height: 8px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+            animation: ringDot2 5s ease-in-out infinite;
+        }
+
+        @keyframes ringRotate {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes ringDot {
+            0%, 100% { opacity: 1; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.3; transform: translateX(-50%) scale(0.6); }
+        }
+
+        @keyframes ringDot2 {
+            0%, 100% { opacity: 0.5; transform: translateX(50%) scale(1); }
+            50% { opacity: 1; transform: translateX(50%) scale(1.4); }
+        }
+
         .hero-logo-img {
-            height: 140px;
+            height: 160px;
             width: auto;
             position: relative;
             z-index: 1;
-            filter: drop-shadow(0 0 30px rgba(0,212,255,0.4)) drop-shadow(0 10px 30px rgba(0,0,0,0.5));
+            filter: drop-shadow(0 0 40px rgba(255,255,255,0.15)) drop-shadow(0 0 80px rgba(0,212,255,0.1));
             animation: logoFloat 4s ease-in-out infinite;
         }
         @keyframes logoFloat {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-12px); }
         }
+
         .hero-tagline {
-            font-size: 2rem;
+            font-size: 2.2rem;
             font-weight: 800;
             color: #fff;
             margin-bottom: 10px;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.7);
+            text-shadow: 0 2px 30px rgba(0,0,0,0.7);
+            animation: fadeInUp 1s ease-out;
         }
         .hero-tagline span {
             color: var(--cyan);
+            text-shadow: 0 0 30px rgba(0,212,255,0.3);
         }
+
         .hero-divider {
-            width: 60px;
+            width: 80px;
             height: 3px;
             background: linear-gradient(90deg, transparent, var(--cyan), transparent);
-            margin: 0 auto 18px;
+            margin: 0 auto 20px;
             border-radius: 2px;
+            animation: expandWidth 1.5s ease-out;
         }
+        @keyframes expandWidth {
+            0% { width: 0; opacity: 0; }
+            100% { width: 80px; opacity: 1; }
+        }
+
         .hero-title {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             line-height: 1.6;
             opacity: 0.95;
+            animation: fadeInUp 1.2s ease-out;
         }
         .hero-title span {
             color: var(--cyan);
             font-weight: 800;
         }
+
         .hero-desc {
-            font-size: 1rem;
+            font-size: 1.05rem;
             opacity: 0.9;
-            margin-bottom: 30px;
-            line-height: 2;
+            margin-bottom: 35px;
+            line-height: 2.1;
             max-width: 650px;
             margin-left: auto;
             margin-right: auto;
+            animation: fadeInUp 1.4s ease-out;
         }
+
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
         .hero-btns {
             display: flex;
-            gap: 15px;
+            gap: 18px;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
+            animation: fadeInUp 1.6s ease-out;
         }
         .btn {
             padding: 14px 34px;
@@ -369,7 +499,7 @@
         }
         .btn-cyan:hover {
             background: var(--cyan-dark);
-            transform: translateY(-4px);
+            transform: translateY(-4px) scale(1.02);
             box-shadow: 0 15px 40px rgba(0,212,255,0.5);
         }
         .btn-outline {
@@ -381,9 +511,10 @@
         .btn-outline:hover {
             background: white;
             color: var(--primary-dark);
-            transform: translateY(-4px);
+            transform: translateY(-4px) scale(1.02);
             border-color: white;
         }
+
         .wave-bottom {
             position: absolute;
             bottom: -2px;
@@ -758,7 +889,27 @@
                 padding: 50px 15px 40px;
             }
             .hero-logo-img {
-                height: 100px;
+                height: 110px;
+            }
+            .hero-logo-wrapper::before {
+                width: 250px;
+                height: 250px;
+            }
+            .hero-logo-wrapper::after {
+                width: 200px;
+                height: 200px;
+            }
+            .hero-logo-ring {
+                width: 230px;
+                height: 230px;
+            }
+            @keyframes glowWhite {
+                0%, 100% { width: 250px; height: 250px; }
+                50% { width: 300px; height: 300px; }
+            }
+            @keyframes glowBlue {
+                0%, 100% { width: 200px; height: 200px; }
+                50% { width: 250px; height: 250px; }
             }
             .hero-tagline {
                 font-size: 1.5rem;
@@ -769,13 +920,8 @@
             .hero-desc {
                 font-size: 0.9rem;
             }
-            .hero-logo-wrapper::before {
-                width: 180px;
-                height: 180px;
-            }
-            @keyframes glowPulse {
-                0%, 100% { width: 180px; height: 180px; }
-                50% { width: 210px; height: 210px; }
+            .hero-divider {
+                width: 60px;
             }
 
             .quotes-container {
@@ -844,12 +990,24 @@
                 height: 80px;
             }
             .hero-logo-wrapper::before {
+                width: 180px;
+                height: 180px;
+            }
+            .hero-logo-wrapper::after {
                 width: 140px;
                 height: 140px;
             }
-            @keyframes glowPulse {
+            .hero-logo-ring {
+                width: 160px;
+                height: 160px;
+            }
+            @keyframes glowWhite {
+                0%, 100% { width: 180px; height: 180px; }
+                50% { width: 220px; height: 220px; }
+            }
+            @keyframes glowBlue {
                 0%, 100% { width: 140px; height: 140px; }
-                50% { width: 170px; height: 170px; }
+                50% { width: 180px; height: 180px; }
             }
             .stats-grid {
                 grid-template-columns: 1fr;
@@ -932,6 +1090,8 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="hero-logo-wrapper">
+                <!-- الحلقات الضوئية حول اللوجو -->
+                <div class="hero-logo-ring"></div>
                 <img src="https://imgur.com/d2YNdZQ.png" alt="شعار Kyntrava AI" class="hero-logo-img">
             </div>
             <h1 class="hero-tagline"><span>Kyntrava AI</span> المستقبل بالذكاء الاصطناعي</h1>
