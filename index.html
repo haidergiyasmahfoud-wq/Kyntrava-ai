@@ -30,6 +30,9 @@
             --white: #FFFFFF;
             --shadow: 0 4px 20px rgba(0,0,0,0.08);
             --shadow-hover: 0 12px 35px rgba(0,0,0,0.15);
+            /* ألوان الخلفية الجديدة - أفتح */
+            --hero-bg-start: #0D1F3C;
+            --hero-bg-end: #162D4D;
         }
 
         body {
@@ -234,18 +237,18 @@
             display: block;
         }
 
-        /* ===== الهيرو ===== */
+        /* ===== الهيرو - خلفية أفتح ===== */
         .hero {
             position: relative;
-            min-height: 90vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
-            padding: 60px 20px 50px;
+            padding: 80px 20px 60px;
             overflow: hidden;
-            background: var(--primary-dark);
+            background: linear-gradient(145deg, var(--hero-bg-start) 0%, var(--hero-bg-end) 50%, #1A3355 100%);
             margin-top: 0;
         }
         #heroCanvas {
@@ -262,7 +265,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(160deg, rgba(10,22,40,0.92) 0%, rgba(13,27,42,0.88) 50%, rgba(10,22,40,0.92) 100%);
+            background: linear-gradient(160deg, rgba(13,31,60,0.75) 0%, rgba(22,45,77,0.70) 50%, rgba(26,51,85,0.75) 100%);
             z-index: 1;
         }
         .hero-content {
@@ -278,7 +281,6 @@
             margin-bottom: 15px;
         }
         
-        /* الشعاع الأبيض الرئيسي */
         .hero-logo-wrapper::before {
             content: '';
             position: absolute;
@@ -288,9 +290,9 @@
             width: 350px;
             height: 350px;
             background: radial-gradient(circle, 
-                rgba(255,255,255,0.25) 0%, 
-                rgba(255,255,255,0.08) 30%, 
-                rgba(255,255,255,0.02) 60%, 
+                rgba(255,255,255,0.30) 0%, 
+                rgba(255,255,255,0.12) 30%, 
+                rgba(255,255,255,0.04) 60%, 
                 transparent 80%
             );
             border-radius: 50%;
@@ -298,7 +300,6 @@
             z-index: 0;
         }
         
-        /* الشعاع الأزرق الثانوي */
         .hero-logo-wrapper::after {
             content: '';
             position: absolute;
@@ -308,8 +309,8 @@
             width: 280px;
             height: 280px;
             background: radial-gradient(circle, 
-                rgba(0,212,255,0.2) 0%, 
-                rgba(0,212,255,0.05) 40%, 
+                rgba(0,212,255,0.25) 0%, 
+                rgba(0,212,255,0.08) 40%, 
                 transparent 70%
             );
             border-radius: 50%;
@@ -318,36 +319,15 @@
         }
 
         @keyframes glowWhite {
-            0%, 100% { 
-                width: 350px; 
-                height: 350px; 
-                opacity: 0.8;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% { 
-                width: 420px; 
-                height: 420px; 
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1.1);
-            }
+            0%, 100% { width: 350px; height: 350px; opacity: 0.8; transform: translate(-50%, -50%) scale(1); }
+            50% { width: 420px; height: 420px; opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
         }
 
         @keyframes glowBlue {
-            0%, 100% { 
-                width: 280px; 
-                height: 280px; 
-                opacity: 0.6;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% { 
-                width: 340px; 
-                height: 340px; 
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(1.15);
-            }
+            0%, 100% { width: 280px; height: 280px; opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+            50% { width: 340px; height: 340px; opacity: 1; transform: translate(-50%, -50%) scale(1.15); }
         }
 
-        /* ===== حلقة ضوئية متحركة حول اللوجو ===== */
         .hero-logo-ring {
             position: absolute;
             top: 50%;
@@ -356,7 +336,7 @@
             width: 320px;
             height: 320px;
             border-radius: 50%;
-            border: 1.5px solid rgba(255,255,255,0.08);
+            border: 1.5px solid rgba(255,255,255,0.10);
             z-index: 0;
             animation: ringRotate 12s linear infinite;
         }
@@ -419,7 +399,7 @@
             font-weight: 800;
             color: #fff;
             margin-bottom: 10px;
-            text-shadow: 0 2px 30px rgba(0,0,0,0.7);
+            text-shadow: 0 2px 30px rgba(0,0,0,0.5);
             animation: fadeInUp 1s ease-out;
         }
         .hero-tagline span {
@@ -447,6 +427,7 @@
             line-height: 1.6;
             opacity: 0.95;
             animation: fadeInUp 1.2s ease-out;
+            color: #E8F0FF;
         }
         .hero-title span {
             color: var(--cyan);
@@ -462,6 +443,7 @@
             margin-left: auto;
             margin-right: auto;
             animation: fadeInUp 1.4s ease-out;
+            color: #C8D8F0;
         }
 
         @keyframes fadeInUp {
@@ -755,7 +737,7 @@
         /* ===== CTA ===== */
         .cta-section {
             padding: 60px 20px;
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
+            background: linear-gradient(135deg, var(--hero-bg-start), var(--hero-bg-end));
             text-align: center;
             color: white;
         }
@@ -775,6 +757,7 @@
             max-width: 600px;
             margin-left: auto;
             margin-right: auto;
+            color: #C8D8F0;
         }
 
         /* ===== الفوتر ===== */
@@ -804,7 +787,7 @@
             gap: 4px;
         }
 
-        /* ===== ميديا كويري - جوال ===== */
+        /* ===== ميديا كويري ===== */
         @media (max-width: 992px) {
             .services-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -885,8 +868,8 @@
             }
 
             .hero {
-                min-height: 80vh;
-                padding: 50px 15px 40px;
+                min-height: 90vh;
+                padding: 60px 15px 50px;
             }
             .hero-logo-img {
                 height: 110px;
@@ -1090,7 +1073,6 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="hero-logo-wrapper">
-                <!-- الحلقات الضوئية حول اللوجو -->
                 <div class="hero-logo-ring"></div>
                 <img src="https://imgur.com/d2YNdZQ.png" alt="شعار Kyntrava AI" class="hero-logo-img">
             </div>
@@ -1265,165 +1247,346 @@
             });
         });
 
-        // ===== Three.js - روبوتات متحركة =====
+        // ==========================================
+        // Three.js - روبوتات بشرية متحركة ثلاثية الأبعاد
+        // ==========================================
         (function() {
             const canvas = document.getElementById('heroCanvas');
             if (!canvas) return;
 
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 14;
-            camera.position.y = 1.5;
+            camera.position.z = 12;
+            camera.position.y = 2;
 
-            const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+            const renderer = new THREE.WebGLRenderer({ 
+                canvas, 
+                antialias: true, 
+                alpha: true 
+            });
             renderer.setSize(window.innerWidth, window.innerHeight);
             renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 1.2;
 
-            const ambientLight = new THREE.AmbientLight(0x2C3E50, 0.5);
+            // ===== إضاءة محسنة =====
+            const ambientLight = new THREE.AmbientLight(0x4488cc, 0.3);
             scene.add(ambientLight);
 
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.4);
-            directionalLight.position.set(5, 5, 5);
-            scene.add(directionalLight);
+            const mainLight = new THREE.DirectionalLight(0xffffff, 0.7);
+            mainLight.position.set(5, 8, 5);
+            mainLight.castShadow = true;
+            scene.add(mainLight);
 
-            const pointLight1 = new THREE.PointLight(0x00D4FF, 0.6, 15);
-            pointLight1.position.set(-4, 2, 4);
+            const fillLight = new THREE.DirectionalLight(0x4488ff, 0.3);
+            fillLight.position.set(-5, 2, -5);
+            scene.add(fillLight);
+
+            const rimLight = new THREE.DirectionalLight(0x00D4FF, 0.3);
+            rimLight.position.set(0, -3, -8);
+            scene.add(rimLight);
+
+            const pointLight1 = new THREE.PointLight(0x00D4FF, 0.5, 20);
+            pointLight1.position.set(-4, 3, 4);
             scene.add(pointLight1);
 
-            const pointLight2 = new THREE.PointLight(0x0099CC, 0.4, 15);
-            pointLight2.position.set(4, -1, 3);
+            const pointLight2 = new THREE.PointLight(0x0099CC, 0.4, 20);
+            pointLight2.position.set(4, 1, 3);
             scene.add(pointLight2);
 
+            // ===== شبكة أرضية =====
             const gridHelper = new THREE.GridHelper(20, 20, 0x00D4FF, 0x1a2a3a);
-            gridHelper.position.y = -4;
+            gridHelper.position.y = -3.5;
             scene.add(gridHelper);
 
-            const robotsGroup = new THREE.Group();
-            scene.add(robotsGroup);
-
-            const robotPositions = [
-                { x: -4, z: -2, scale: 0.8 },
-                { x: 0, z: -3, scale: 1.0 },
-                { x: 4, z: -1.5, scale: 0.7 },
-                { x: -5, z: 2, scale: 0.6 },
-                { x: 5, z: 2.5, scale: 0.9 },
-                { x: -2, z: 4, scale: 0.7 },
-                { x: 3, z: 4.5, scale: 0.8 },
-            ];
-
-            const robotColors = [0x00D4FF, 0x0099CC, 0x00B8D4, 0x26C6DA, 0x4DD0E1, 0x00D4FF, 0x0099CC];
-
-            robotPositions.forEach((pos, index) => {
+            // ===== إنشاء روبوت بشري متكامل =====
+            function createHumanRobot(color, scale = 1) {
                 const group = new THREE.Group();
-                const color = robotColors[index % robotColors.length];
+                const matBody = new THREE.MeshPhongMaterial({ 
+                    color: color, 
+                    emissive: color, 
+                    emissiveIntensity: 0.08,
+                    shininess: 60,
+                    metalness: 0.3,
+                    roughness: 0.4
+                });
+                const matSkin = new THREE.MeshPhongMaterial({ 
+                    color: 0xddddff, 
+                    emissive: 0x334466,
+                    emissiveIntensity: 0.05,
+                    shininess: 80,
+                    metalness: 0.1,
+                    roughness: 0.3
+                });
+                const matVisor = new THREE.MeshPhongMaterial({ 
+                    color: 0x00D4FF, 
+                    emissive: 0x00D4FF,
+                    emissiveIntensity: 0.5,
+                    transparent: true,
+                    opacity: 0.7,
+                    shininess: 100,
+                    metalness: 0.5,
+                    roughness: 0.1
+                });
+                const matJoint = new THREE.MeshPhongMaterial({ 
+                    color: 0x8899aa, 
+                    emissive: 0x334455,
+                    emissiveIntensity: 0.1,
+                    metalness: 0.6,
+                    roughness: 0.3
+                });
+                const matLight = new THREE.MeshPhongMaterial({ 
+                    color: 0x00D4FF, 
+                    emissive: 0x00D4FF,
+                    emissiveIntensity: 1
+                });
 
-                const bodyGeo = new THREE.BoxGeometry(0.8, 1.2, 0.6);
-                const bodyMat = new THREE.MeshPhongMaterial({ color: color, emissive: color, emissiveIntensity: 0.15, shininess: 80 });
-                const body = new THREE.Mesh(bodyGeo, bodyMat);
-                body.position.y = 0.6;
-                group.add(body);
+                // ===== الجذع =====
+                const torsoGeo = new THREE.CylinderGeometry(0.5, 0.6, 1.1, 12);
+                const torso = new THREE.Mesh(torsoGeo, matBody);
+                torso.position.y = 0.55;
+                torso.castShadow = true;
+                group.add(torso);
 
-                const headGeo = new THREE.SphereGeometry(0.35, 16, 16);
-                const headMat = new THREE.MeshPhongMaterial({ color: 0xffffff, emissive: color, emissiveIntensity: 0.1, shininess: 100 });
-                const head = new THREE.Mesh(headGeo, headMat);
-                head.position.y = 1.4;
+                const chestGeo = new THREE.BoxGeometry(0.7, 0.4, 0.3);
+                const chest = new THREE.Mesh(chestGeo, matJoint);
+                chest.position.set(0, 0.7, 0.35);
+                group.add(chest);
+
+                // ===== الرأس =====
+                const headGeo = new THREE.SphereGeometry(0.28, 16, 16);
+                const head = new THREE.Mesh(headGeo, matSkin);
+                head.position.y = 1.35;
+                head.scale.set(1, 1.1, 0.9);
+                head.castShadow = true;
                 group.add(head);
 
-                const eyeGeo = new THREE.SphereGeometry(0.06, 8, 8);
-                const eyeMat = new THREE.MeshPhongMaterial({ color: 0x00D4FF, emissive: 0x00D4FF, emissiveIntensity: 0.8 });
+                const helmetGeo = new THREE.SphereGeometry(0.3, 16, 16);
+                const helmet = new THREE.Mesh(helmetGeo, matJoint);
+                helmet.position.y = 1.35;
+                helmet.scale.set(1.05, 1.15, 0.95);
+                helmet.material.transparent = true;
+                helmet.material.opacity = 0.3;
+                group.add(helmet);
+
+                const visorGeo = new THREE.PlaneGeometry(0.3, 0.18);
+                const visor = new THREE.Mesh(visorGeo, matVisor);
+                visor.position.set(0, 1.38, 0.29);
+                group.add(visor);
+
+                const eyeGeo = new THREE.SphereGeometry(0.04, 8, 8);
+                const eyeMat = new THREE.MeshPhongMaterial({ 
+                    color: 0x00D4FF, 
+                    emissive: 0x00D4FF,
+                    emissiveIntensity: 0.8
+                });
                 const eye1 = new THREE.Mesh(eyeGeo, eyeMat);
-                eye1.position.set(-0.12, 1.5, 0.35);
+                eye1.position.set(-0.1, 1.42, 0.28);
                 group.add(eye1);
                 const eye2 = new THREE.Mesh(eyeGeo, eyeMat);
-                eye2.position.set(0.12, 1.5, 0.35);
+                eye2.position.set(0.1, 1.42, 0.28);
                 group.add(eye2);
 
-                const armGeo = new THREE.BoxGeometry(0.15, 0.6, 0.15);
-                const armMat = new THREE.MeshPhongMaterial({ color: color, emissive: color, emissiveIntensity: 0.1 });
-                const arm1 = new THREE.Mesh(armGeo, armMat);
-                arm1.position.set(-0.5, 0.6, 0);
-                group.add(arm1);
-                const arm2 = new THREE.Mesh(armGeo, armMat);
-                arm2.position.set(0.5, 0.6, 0);
-                group.add(arm2);
-
-                const legGeo = new THREE.BoxGeometry(0.2, 0.4, 0.2);
-                const legMat = new THREE.MeshPhongMaterial({ color: color, emissive: color, emissiveIntensity: 0.05 });
-                const leg1 = new THREE.Mesh(legGeo, legMat);
-                leg1.position.set(-0.25, -0.2, 0);
-                group.add(leg1);
-                const leg2 = new THREE.Mesh(legGeo, legMat);
-                leg2.position.set(0.25, -0.2, 0);
-                group.add(leg2);
-
-                const antennaGeo = new THREE.CylinderGeometry(0.02, 0.02, 0.3);
-                const antennaMat = new THREE.MeshPhongMaterial({ color: 0x00D4FF, emissive: 0x00D4FF, emissiveIntensity: 0.5 });
+                const antennaGeo = new THREE.CylinderGeometry(0.015, 0.015, 0.25);
+                const antennaMat = new THREE.MeshPhongMaterial({ 
+                    color: 0x00D4FF, 
+                    emissive: 0x00D4FF,
+                    emissiveIntensity: 0.5
+                });
                 const antenna = new THREE.Mesh(antennaGeo, antennaMat);
-                antenna.position.set(0, 1.7, 0);
+                antenna.position.set(0, 1.55, 0.1);
+                antenna.rotation.x = 0.2;
                 group.add(antenna);
 
-                const sphereGeo = new THREE.SphereGeometry(0.06, 8, 8);
-                const sphereMat = new THREE.MeshPhongMaterial({ color: 0x00D4FF, emissive: 0x00D4FF, emissiveIntensity: 0.8 });
-                const sphere = new THREE.Mesh(sphereGeo, sphereMat);
-                sphere.position.set(0, 1.85, 0);
-                group.add(sphere);
+                const tipGeo = new THREE.SphereGeometry(0.03, 8, 8);
+                const tipMat = new THREE.MeshPhongMaterial({ 
+                    color: 0x00D4FF, 
+                    emissive: 0x00D4FF,
+                    emissiveIntensity: 0.8
+                });
+                const tip = new THREE.Mesh(tipGeo, tipMat);
+                tip.position.set(0, 1.68, 0.13);
+                group.add(tip);
 
-                group.position.set(pos.x, -2.5, pos.z);
-                group.scale.set(pos.scale, pos.scale, pos.scale);
-                group.userData = {
-                    rotSpeed: 0.005 + Math.random() * 0.01,
-                    floatSpeed: 0.5 + Math.random() * 0.5,
-                    floatAmp: 0.15 + Math.random() * 0.15,
-                    phase: Math.random() * Math.PI * 2
+                // ===== الأذرع =====
+                const armGeo = new THREE.CylinderGeometry(0.08, 0.1, 0.7, 8);
+                
+                const armR = new THREE.Mesh(armGeo, matBody);
+                armR.position.set(0.55, 0.7, 0);
+                armR.rotation.z = -0.2;
+                armR.castShadow = true;
+                group.add(armR);
+
+                const armL = new THREE.Mesh(armGeo, matBody);
+                armL.position.set(-0.55, 0.7, 0);
+                armL.rotation.z = 0.2;
+                armL.castShadow = true;
+                group.add(armL);
+
+                const jointGeo = new THREE.SphereGeometry(0.08, 8, 8);
+                const jointR = new THREE.Mesh(jointGeo, matJoint);
+                jointR.position.set(0.55, 1.0, 0);
+                group.add(jointR);
+                const jointL = new THREE.Mesh(jointGeo, matJoint);
+                jointL.position.set(-0.55, 1.0, 0);
+                group.add(jointL);
+
+                const handGeo = new THREE.SphereGeometry(0.07, 8, 8);
+                const handMat = new THREE.MeshPhongMaterial({ color: 0x8899aa, metalness: 0.5, roughness: 0.3 });
+                const handR = new THREE.Mesh(handGeo, handMat);
+                handR.position.set(0.6, 0.32, 0);
+                group.add(handR);
+                const handL = new THREE.Mesh(handGeo, handMat);
+                handL.position.set(-0.6, 0.32, 0);
+                group.add(handL);
+
+                // ===== الأرجل =====
+                const legGeo = new THREE.CylinderGeometry(0.08, 0.12, 0.6, 8);
+                
+                const legR = new THREE.Mesh(legGeo, matBody);
+                legR.position.set(0.2, -0.3, 0);
+                legR.rotation.x = 0.1;
+                legR.castShadow = true;
+                group.add(legR);
+                
+                const legL = new THREE.Mesh(legGeo, matBody);
+                legL.position.set(-0.2, -0.3, 0);
+                legL.rotation.x = -0.1;
+                legL.castShadow = true;
+                group.add(legL);
+
+                const kneeGeo = new THREE.SphereGeometry(0.07, 8, 8);
+                const kneeR = new THREE.Mesh(kneeGeo, matJoint);
+                kneeR.position.set(0.2, -0.1, 0.05);
+                group.add(kneeR);
+                const kneeL = new THREE.Mesh(kneeGeo, matJoint);
+                kneeL.position.set(-0.2, -0.1, 0.05);
+                group.add(kneeL);
+
+                const footGeo = new THREE.BoxGeometry(0.15, 0.05, 0.25);
+                const footMat = new THREE.MeshPhongMaterial({ color: 0x667788, metalness: 0.4, roughness: 0.5 });
+                const footR = new THREE.Mesh(footGeo, footMat);
+                footR.position.set(0.2, -0.6, 0.05);
+                group.add(footR);
+                const footL = new THREE.Mesh(footGeo, footMat);
+                footL.position.set(-0.2, -0.6, 0.05);
+                group.add(footL);
+
+                // ===== أضواء الجسم =====
+                const lightGeo = new THREE.SphereGeometry(0.03, 8, 8);
+                for (let i = 0; i < 3; i++) {
+                    const l = new THREE.Mesh(lightGeo, matLight);
+                    l.position.set(0, 0.5 + i * 0.2, 0.45);
+                    group.add(l);
+                }
+
+                const packGeo = new THREE.BoxGeometry(0.25, 0.3, 0.08);
+                const packMat = new THREE.MeshPhongMaterial({ 
+                    color: 0x445566, 
+                    metalness: 0.6, 
+                    roughness: 0.3,
+                    emissive: 0x00D4FF,
+                    emissiveIntensity: 0.05
+                });
+                const pack = new THREE.Mesh(packGeo, packMat);
+                pack.position.set(0, 0.5, -0.35);
+                group.add(pack);
+
+                for (let i = 0; i < 3; i++) {
+                    const dot = new THREE.Mesh(
+                        new THREE.SphereGeometry(0.015, 6, 6),
+                        new THREE.MeshPhongMaterial({ 
+                            color: 0x00D4FF, 
+                            emissive: 0x00D4FF,
+                            emissiveIntensity: 0.6
+                        })
+                    );
+                    dot.position.set(-0.1 + i * 0.1, 0.7 - i * 0.08, 0.46);
+                    group.add(dot);
+                }
+
+                group.scale.set(scale, scale, scale);
+                return group;
+            }
+
+            // ===== وضع الروبوتات البشرية في المشهد =====
+            const robots = [];
+            const robotConfigs = [
+                { x: -4.5, z: -2, scale: 0.7, color: 0x00D4FF, rotSpeed: 0.005, floatSpeed: 0.4, floatAmp: 0.12 },
+                { x: 0, z: -3.5, scale: 0.85, color: 0x0099CC, rotSpeed: 0.008, floatSpeed: 0.6, floatAmp: 0.15 },
+                { x: 4.5, z: -1.5, scale: 0.65, color: 0x26C6DA, rotSpeed: 0.004, floatSpeed: 0.5, floatAmp: 0.1 },
+                { x: -5.5, z: 2, scale: 0.55, color: 0x4DD0E1, rotSpeed: 0.006, floatSpeed: 0.7, floatAmp: 0.08 },
+                { x: 5.5, z: 2.5, scale: 0.6, color: 0x00B8D4, rotSpeed: 0.007, floatSpeed: 0.45, floatAmp: 0.13 },
+                { x: -2.5, z: 4.5, scale: 0.5, color: 0x00838F, rotSpeed: 0.005, floatSpeed: 0.55, floatAmp: 0.09 },
+                { x: 2.5, z: 5, scale: 0.55, color: 0x00D4FF, rotSpeed: 0.009, floatSpeed: 0.65, floatAmp: 0.14 },
+                { x: -6, z: -3.5, scale: 0.45, color: 0x0099CC, rotSpeed: 0.006, floatSpeed: 0.5, floatAmp: 0.11 },
+                { x: 6, z: -3, scale: 0.5, color: 0x26C6DA, rotSpeed: 0.007, floatSpeed: 0.6, floatAmp: 0.1 },
+            ];
+
+            robotConfigs.forEach((config) => {
+                const robot = createHumanRobot(config.color, config.scale);
+                robot.position.set(config.x, -2.5, config.z);
+                robot.userData = {
+                    rotSpeed: config.rotSpeed + (Math.random() - 0.5) * 0.003,
+                    floatSpeed: config.floatSpeed + (Math.random() - 0.5) * 0.1,
+                    floatAmp: config.floatAmp + (Math.random() - 0.5) * 0.03,
+                    phase: Math.random() * Math.PI * 2,
+                    armSwing: 0,
+                    baseY: -2.5
                 };
-                robotsGroup.add(group);
+                scene.add(robot);
+                robots.push(robot);
             });
 
+            // ===== جزيئات متطايرة =====
             const particlesGroup = new THREE.Group();
             scene.add(particlesGroup);
 
-            const particlesCount = 80;
+            const particlesCount = 150;
             const particles = [];
 
             for (let i = 0; i < particlesCount; i++) {
-                const size = Math.random() * 0.06 + 0.02;
+                const size = Math.random() * 0.04 + 0.015;
                 const geo = new THREE.SphereGeometry(size, 6, 6);
                 const mat = new THREE.MeshPhongMaterial({
                     color: Math.random() > 0.5 ? 0x00D4FF : 0x0099CC,
                     emissive: 0x00D4FF,
-                    emissiveIntensity: 0.3,
+                    emissiveIntensity: 0.2 + Math.random() * 0.3,
                     transparent: true,
-                    opacity: 0.5 + Math.random() * 0.3
+                    opacity: 0.3 + Math.random() * 0.4
                 });
                 const particle = new THREE.Mesh(geo, mat);
                 particle.position.set(
-                    (Math.random() - 0.5) * 18,
-                    (Math.random() - 0.5) * 12,
-                    (Math.random() - 0.5) * 8
+                    (Math.random() - 0.5) * 20,
+                    (Math.random() - 0.5) * 14,
+                    (Math.random() - 0.5) * 10
                 );
                 particle.userData = {
-                    speedY: (Math.random() - 0.5) * 0.015,
-                    speedX: (Math.random() - 0.5) * 0.008,
-                    speedZ: (Math.random() - 0.5) * 0.008,
+                    speedY: (Math.random() - 0.5) * 0.012,
+                    speedX: (Math.random() - 0.5) * 0.006,
+                    speedZ: (Math.random() - 0.5) * 0.006,
                     baseY: particle.position.y,
-                    amplitude: Math.random() * 1.5,
+                    amplitude: Math.random() * 2,
                     phase: Math.random() * Math.PI * 2
                 };
                 particles.push(particle);
                 particlesGroup.add(particle);
             }
 
+            // ===== حلقات ضوئية =====
             const ringsGroup = new THREE.Group();
             scene.add(ringsGroup);
 
             for (let j = 0; j < 3; j++) {
-                const ringGeo = new THREE.TorusGeometry(3.5 + j * 1.8, 0.03, 16, 80);
+                const ringGeo = new THREE.TorusGeometry(3.5 + j * 1.8, 0.025, 16, 80);
                 const ringMat = new THREE.MeshPhongMaterial({
                     color: 0x00D4FF,
                     emissive: 0x00D4FF,
-                    emissiveIntensity: 0.2,
+                    emissiveIntensity: 0.15,
                     transparent: true,
-                    opacity: 0.2 - j * 0.05
+                    opacity: 0.15 - j * 0.04
                 });
                 const ring = new THREE.Mesh(ringGeo, ringMat);
                 ring.rotation.x = Math.PI / 2 + j * 0.25;
@@ -1432,25 +1595,37 @@
                 ringsGroup.add(ring);
             }
 
+            // ===== أنيميشن =====
             function animate() {
                 requestAnimationFrame(animate);
                 const time = Date.now() * 0.001;
 
-                robotsGroup.children.forEach((robot) => {
+                robots.forEach((robot) => {
                     const data = robot.userData;
                     robot.rotation.y += data.rotSpeed;
-                    robot.position.y = -2.5 + Math.sin(time * data.floatSpeed + data.phase) * data.floatAmp;
+                    robot.position.y = data.baseY + Math.sin(time * data.floatSpeed + data.phase) * data.floatAmp;
+                    
+                    const armSwing = Math.sin(time * data.floatSpeed * 0.8 + data.phase) * 0.15;
+                    const children = robot.children;
+                    if (children[4]) {
+                        children[4].rotation.z = -0.2 + armSwing * 0.5;
+                    }
+                    if (children[5]) {
+                        children[5].rotation.z = 0.2 - armSwing * 0.5;
+                    }
+                    if (children[2]) {
+                        children[2].rotation.y = Math.sin(time * 0.3 + data.phase) * 0.05;
+                    }
                 });
-
-                robotsGroup.rotation.y += 0.0005;
 
                 particles.forEach(p => {
                     p.position.y += p.userData.speedY;
-                    p.position.x += Math.sin(time + p.userData.phase) * 0.008;
+                    p.position.x += Math.sin(time + p.userData.phase) * 0.006;
+                    p.position.z += Math.cos(time * 0.7 + p.userData.phase) * 0.006;
                     if (Math.abs(p.position.y - p.userData.baseY) > p.userData.amplitude) {
                         p.userData.speedY *= -1;
                     }
-                    p.material.opacity = 0.4 + Math.sin(time * 2 + p.userData.phase) * 0.2;
+                    p.material.opacity = 0.3 + Math.sin(time * 1.5 + p.userData.phase) * 0.2;
                 });
 
                 particlesGroup.rotation.y += 0.0003;
@@ -1459,8 +1634,8 @@
                     ring.rotation.z += ring.userData.rotationSpeed;
                 });
 
-                pointLight1.intensity = 0.4 + Math.sin(time * 1.5) * 0.2;
-                pointLight2.intensity = 0.4 + Math.cos(time * 1.3) * 0.2;
+                pointLight1.intensity = 0.4 + Math.sin(time * 1.2) * 0.15;
+                pointLight2.intensity = 0.3 + Math.cos(time * 1.1) * 0.15;
 
                 renderer.render(scene, camera);
             }
@@ -1474,12 +1649,32 @@
             });
 
             let mouseX = 0, mouseY = 0;
+            let targetRotY = 0, targetRotX = 0;
+            
             window.addEventListener('mousemove', (e) => {
                 mouseX = (e.clientX / window.innerWidth) * 2 - 1;
                 mouseY = -(e.clientY / window.innerHeight) * 2 + 1;
-                robotsGroup.rotation.y += (mouseX * 0.2 - robotsGroup.rotation.y) * 0.02;
-                robotsGroup.rotation.x += (mouseY * 0.1 - robotsGroup.rotation.x) * 0.02;
+                targetRotY = mouseX * 0.15;
+                targetRotX = mouseY * 0.08;
             });
+
+            setInterval(() => {
+                robots.forEach((robot) => {
+                    robot.rotation.y += (targetRotY - robot.rotation.y) * 0.01;
+                    robot.rotation.x += (targetRotX - robot.rotation.x) * 0.01;
+                });
+            }, 16);
+
+            window.addEventListener('touchmove', (e) => {
+                const touch = e.touches[0];
+                if (touch) {
+                    mouseX = (touch.clientX / window.innerWidth) * 2 - 1;
+                    mouseY = -(touch.clientY / window.innerHeight) * 2 + 1;
+                    targetRotY = mouseX * 0.15;
+                    targetRotX = mouseY * 0.08;
+                }
+            }, { passive: true });
+
         })();
     </script>
 </body>
